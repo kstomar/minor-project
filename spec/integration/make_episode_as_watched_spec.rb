@@ -8,9 +8,9 @@ RSpec.describe "make episode as watched", :type => :request do
     ep2 = Episode.create!(episode: 2, tv_show_id: tv_show.id, watched: false)
     tv_show.episodes << [ep1, ep2]
 
-    post "/users/sign_in", user: {:email => "foo@example.com", :password => "secret123"}
-    put "/episodes/#{ep1.id}", tv_show_id: tv_show.id, episode: { watched: true }, format: :json
-    get '/episodes', tv_show_id: tv_show.id, format: :json
+    post "/users/sign_in", params: {user: {:email => "foo@example.com", :password => "secret123"}}
+    put "/episodes/#{ep1.id}", params: {tv_show_id: tv_show.id, episode: { watched: true }}, headers: {"ACCEPT" => "application/json"}
+    get '/episodes', params: {tv_show_id: tv_show.id} , headers: {"ACCEPT" => "application/json"}
 
     expect(response.body).to include('true')
   end

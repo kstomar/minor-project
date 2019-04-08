@@ -1,7 +1,7 @@
 Internal RAGNARSON Interview Refactor App
 =========================================
 
-Basic JSON API - Collection of TvShows watched by user
+Basic JSON API - Collection of TvShows watched by users
 
 How to run locally
 ------------------
@@ -24,4 +24,4 @@ TODO:
 
 * Extend in a way you like
 * Refactor what you don't like
-
+* Spend as much as 2 hours, things you didn't finish in time write down in README and we'll discuss those during the interview. It is more important to show that you understand the application and problems contained in it, rather than implementing all solutions in the application code itself.
