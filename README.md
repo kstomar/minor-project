@@ -24,4 +24,4 @@ TODO:
 
 * Extend in a way you like
 * Refactor what you don't like
-* Spend as much as 2 hours, things you didn't finish in time write down in README and we'll discuss those during the interview. It is more important to show that you understand the application and problems contained in it, rather than implementing all solutions in the application code itself.
+* There is no hard time limit, but we feel that it shouldn't take you more than 3-4 hours to complete this task.
