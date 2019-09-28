@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TvShowsController, :type => :controller do
+RSpec.describe Api::V1::TvShowsController, :type => :controller do
 
   before do
     user = User.create!(email: 'foo@example.com', password: '12345678')

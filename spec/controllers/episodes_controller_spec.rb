@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EpisodesController, :type => :controller do
+RSpec.describe Api::V1::EpisodesController, :type => :controller do
   let!(:tv_show) { TvShow.create! }
 
   before do
