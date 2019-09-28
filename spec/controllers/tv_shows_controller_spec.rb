@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe TvShowsController, :type => :controller do
+RSpec.describe Api::V1::TvShowsController, :type => :controller do
+  let!(:user) { User.create!(email: 'foo@example.com', password: '12345678')}
 
   before do
-    user = User.create!(email: 'foo@example.com', password: '12345678')
     sign_in user
   end
 
@@ -16,9 +16,11 @@ RSpec.describe TvShowsController, :type => :controller do
     end
 
     it "loads all of the tv_shows into @tv_shows" do
-      tv_show1, tv_show2 = TvShow.create!, TvShow.create!
+      tv_show1, tv_show2 = TvShow.create!(user_id: user.id), TvShow.create!(user_id: user.id)
       get :index, :format => :json
+byebug
 
+      expect(json_response['data']['tv_show']).to have_key('episodes')
       # expect(assigns(:tv_shows)).to match_array([tv_show1, tv_show2])
     end
   end
@@ -35,7 +37,7 @@ RSpec.describe TvShowsController, :type => :controller do
 
     it "loads all of the tv_shows into @tv_shows" do
       get :show, params: {id: tv_show.id}, :format => :json
-
+      expect(json_response['data']['tv_show']).to have_key('episodes')
       # expect(assigns(:tv_show)).to match(tv_show)
     end
 
@@ -43,10 +45,8 @@ RSpec.describe TvShowsController, :type => :controller do
       ep1 = Episode.create!(episode: 1, tv_show_id: tv_show.id)
       ep2 = Episode.create!(episode: 2, tv_show_id: tv_show.id)
       get :show, params: {id: tv_show.id }, :format => :json
-
-      expect(JSON.parse(response.body)).to have_key('episodes')
-      expect(JSON.parse(response.body)['episodes']).to be_an(Array)
-      expect(response.body).to match(/#{tv_show.id}/)
+      expect(json_response['data']['tv_show']).to have_key('episodes')
+      expect(json_response['data']['tv_show']['episodes']).to be_an(Array)
     end
   end
 
@@ -103,7 +103,6 @@ RSpec.describe TvShowsController, :type => :controller do
     it "respond with deleted tv show" do
       request.accept = "application/json"
       delete :destroy, params: {id: tv_show.id}
-
       expect(response.body).to include('House')
     end
   end
